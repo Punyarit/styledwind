@@ -1,4 +1,1 @@
-export function getCssVariableResult(cssVariablesResult) {
-    return cssVariablesResult.length ? `sw-theme{${cssVariablesResult.join('')}}` : ``;
-}
-//# sourceMappingURL=getCssVariableResult.js.map
+function getCssVariableResult(e){return e.length?`sw-theme{${e.join("")}}`:""}export{getCssVariableResult};

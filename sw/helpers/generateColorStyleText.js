@@ -1,8 +1,1 @@
-export function generateColorStyleText(themeObj) {
-    let cssOutput = '';
-    for (const [theme, value] of Object.entries(themeObj)) {
-        cssOutput += `sw-theme.${theme} { ${value} } `;
-    }
-    return cssOutput;
-}
-//# sourceMappingURL=generateColorStyleText.js.map
+function generateColorStyleText(e){let t="";for(var[r,o]of Object.entries(e))t+=`sw-theme.${r} { ${o} } `;return t}export{generateColorStyleText};

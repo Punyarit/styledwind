@@ -1,18 +1,1 @@
-import { getAccessibleClassName } from './helpers/getAccessibleClassName';
-import { getCssVariableResult } from './helpers/getCssVariableResult';
-import { getScreenStyleResult } from './helpers/getScreenStyleResult';
-import { parseStyle } from './helpers/parseStyle';
-import { createAndInjectStyle } from './helpers/createAndInjectStyle';
-export default (styleAbbr) => {
-    const { hashedClasses, styleResult, screenStyleResult, cssVariablesResult, scope } = parseStyle(styleAbbr);
-    const variableResult = getCssVariableResult(cssVariablesResult);
-    const { screenAccessibleClass, screenCssText } = getScreenStyleResult(screenStyleResult, hashedClasses);
-    const cssTextResult = [...styleResult, ...screenCssText, variableResult].join('');
-    createAndInjectStyle(cssTextResult);
-    const accessibleClassName = getAccessibleClassName(scope, {
-        ...hashedClasses,
-        ...screenAccessibleClass,
-    });
-    return accessibleClassName;
-};
-//# sourceMappingURL=styled.js.map
+import{getAccessibleClassName}from"./helpers/getAccessibleClassName";import{getCssVariableResult}from"./helpers/getCssVariableResult";import{getScreenStyleResult}from"./helpers/getScreenStyleResult";import{parseStyle}from"./helpers/parseStyle";import{createAndInjectStyle}from"./helpers/createAndInjectStyle";export default e=>{var{hashedClasses:e,styleResult:s,screenStyleResult:t,cssVariablesResult:l,scope:r}=parseStyle(e),l=getCssVariableResult(l),{screenAccessibleClass:t,screenCssText:a}=getScreenStyleResult(t,e),s=[...s,...a,l].join(""),a=(createAndInjectStyle(s),getAccessibleClassName(r,{...e,...t}));return a};

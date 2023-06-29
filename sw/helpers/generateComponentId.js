@@ -1,6 +1,1 @@
-import generateAlphabeticName from './generateAlphabeticName';
-import { hash } from './hash';
-export default function generateComponentId(str) {
-    return generateAlphabeticName(hash(str) >>> 0);
-}
-//# sourceMappingURL=generateComponentId.js.map
+import generateAlphabeticName from"./generateAlphabeticName";import{hash}from"./hash";export default function generateComponentId(e){return generateAlphabeticName(hash(e)>>>0)}
