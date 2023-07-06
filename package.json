@@ -1,6 +1,7 @@
 {
   "name": "styledwind",
   "private": true,
+  "description": "Lightweight CSS-in-JS employs abbreviations of styles for efficient styling and is compatible with all frameworks.",
   "workspaces": [
     "packages/*"
   ],
@@ -14,5 +15,17 @@
     "gulp": "^4.0.2",
     "gulp-uglify": "^3.0.2",
     "lerna": "^7.1.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Punyarit/styledwind/issues"
+  },
+  "homepage": "https://github.com/Punyarit/styledwind#readme",
+  "author": "Punyarit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Punyarit/styledwind.git"
+  },
+  "keywords": [
+    "styledwind"
+  ]
 }
