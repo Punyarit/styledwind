@@ -1,1 +1,0 @@
-function getCssVariableResult(e){return e.length?`sw-theme{${e.join("")}}`:""}export{getCssVariableResult};

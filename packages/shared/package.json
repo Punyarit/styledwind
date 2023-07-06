@@ -1,0 +1,23 @@
+{
+  "name": "@styledwind/shared",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Kwang <punyarit.thi@hlabconsulting.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/shared.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "@styledwind/theme": "file:../theme"
+  }
+}

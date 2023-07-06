@@ -1,1 +1,0 @@
-function createAndInjectStyle(e){var t=new CSSStyleSheet;t.replaceSync(e),document.adoptedStyleSheets.push(t)}export{createAndInjectStyle};

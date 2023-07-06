@@ -1,1 +1,0 @@
-import generateAlphabeticName from"./generateAlphabeticName";import{hash}from"./hash";export default function generateComponentId(e){return generateAlphabeticName(hash(e)>>>0)}
