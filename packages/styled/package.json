@@ -14,7 +14,8 @@
     "@styledwind/theme": "file:../theme"
   },
   "files": [
-    "lib"
+    "dist/*.js",
+    "dist/*.d.js"
   ],
   "scripts": {
     "build": "tsc"

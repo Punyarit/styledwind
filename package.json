@@ -6,7 +6,9 @@
   ],
   "scripts": {
     "compress": "gulp compress",
-    "dev": "npx lerna run dev"
+    "theme": "npx lerna run dev --scope=@styledwind/theme",
+    "shared": "npx lerna run dev --scope=@styledwind/shared",
+    "styled": "npx lerna run dev --scope=@styledwind/styled"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

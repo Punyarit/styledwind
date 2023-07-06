@@ -11,7 +11,8 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist/*.js",
+    "dist/*.d.js"
   ],
   "scripts": {
     "build": "tsc",
