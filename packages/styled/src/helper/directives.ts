@@ -1,24 +1,23 @@
 import { ThemeMedia } from '@styledwind/theme/dist/ThemeMedia';
 
-console.log('directives.js |ThemeMedia.screenFn| = ', ThemeMedia.screenFn);
+const scope = (cssTemplate: string) => {};
+
+const preset = (cssTemplate: string) => {};
+
+const merge = (cssTemplate: string) => {};
+
+const variable = (cssTemplate: string) => {};
+
+const keyframe = (cssTemplate: string) => {};
+
+const classFn = (cssTemplate: string) => {};
+
 export const directives: Record<string, Function> = {
-  scope: (cssTemplate: string) => {
-    console.log('styled.js |scope| = ');
-  },
-  preset: (cssTemplate: string) => {
-    console.log('styled.js |preset| = ');
-  },
-  merge: (cssTemplate: string) => {
-    console.log('styled.js |merge| = ');
-  },
-  variable: (cssTemplate: string) => {
-    console.log('styled.js |variable| = ');
-  },
-  keyframe: (cssTemplate: string) => {
-    console.log('styled.js |keyframe| = ');
-  },
-  class: (cssTemplate: string) => {
-    console.log('styled.js |class| = ');
-  },
+  scope,
+  preset,
+  merge,
+  variable,
+  keyframe,
+  class: classFn,
   ...ThemeMedia.screenFn,
 };

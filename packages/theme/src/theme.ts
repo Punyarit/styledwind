@@ -17,4 +17,6 @@ export class Theme extends HTMLElement {
   static font = new ThemeFont();
   static media = new ThemeMedia();
   static tag = new ElementTag(Theme, elementName);
+
+  // next feature: shadow mode open and add slot *for lit element
 }
