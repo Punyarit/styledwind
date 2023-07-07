@@ -1,6 +1,6 @@
 import { ThemeMedia } from '@styledwind/theme/dist/ThemeMedia';
-
-const scope = (cssTemplate: string) => {};
+import { classFn } from './classFn';
+import { scopeFn } from './scopeFn';
 
 const preset = (cssTemplate: string) => {};
 
@@ -10,10 +10,8 @@ const variable = (cssTemplate: string) => {};
 
 const keyframe = (cssTemplate: string) => {};
 
-const classFn = (cssTemplate: string) => {};
-
 export const directives: Record<string, Function> = {
-  scope,
+  scope: scopeFn,
   preset,
   merge,
   variable,

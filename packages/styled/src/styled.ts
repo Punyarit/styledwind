@@ -1,10 +1,14 @@
 import { directives } from './helper/directives';
+import { appendStyle } from '@styledwind/shared/dist/appendStyle';
 
-export const styled = <T>(cssTemplateString: TemplateStringsArray): T => {
+export const styled = <T extends string>(
+  cssTemplateString: TemplateStringsArray
+): Record<T, string> => {
+  const styledResult = {} as any;
   const cssTemplates = getTemplateRules(cssTemplateString[0]);
-  const cssRules = getCssRulesByDirective(cssTemplates);
-  console.log('styled.js |cssRules| = ', cssRules);
-  return {} as T;
+  const result = getCssRulesByDirective(cssTemplates, styledResult);
+  appendStyle(result.class.cssRules.join(''));
+  return { ...result.class.classDisplay } as Record<T, string>;
 };
 
 const getTemplateRules = (cssTemplateString: string) => {
@@ -13,12 +17,12 @@ const getTemplateRules = (cssTemplateString: string) => {
   return cssTemplates;
 };
 
-const getCssRulesByDirective = (cssTemplates: string[]) => {
-  const cssRules = {} as any;
+const getCssRulesByDirective = (cssTemplates: string[], styledResult: any) => {
+  const cssRules: Record<string, any> = {};
   for (let index = 0; index < cssTemplates.length; ++index) {
     const cssTemplate = cssTemplates[index];
     const [directiveName] = cssTemplate.split(':');
-    cssRules[directiveName] = directives[directiveName](cssTemplate);
+    cssRules[directiveName] = directives[directiveName](cssTemplate, styledResult);
   }
   return cssRules;
 };

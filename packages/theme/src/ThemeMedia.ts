@@ -14,9 +14,7 @@ export class ThemeMedia {
 
   private createScreenFn(screenObj: Record<string, string>) {
     for (const screenKey in screenObj) {
-      ThemeMedia.screenFn[screenKey] = (cssTemplate: string) => {
-        console.log(`theme.js |${screenKey}| = `);
-      };
+      ThemeMedia.screenFn[screenKey] = (cssTemplate: string) => {};
     }
   }
 }

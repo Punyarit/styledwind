@@ -11,7 +11,8 @@
     "test": "__tests__"
   },
   "dependencies": {
-    "@styledwind/theme": "file:../theme"
+    "@styledwind/theme": "file:../theme",
+    "@styledwind/shared": "file:../shared"
   },
   "files": [
     "dist/*.js",
