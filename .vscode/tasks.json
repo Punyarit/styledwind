@@ -1,0 +1,73 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "packages/shared",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build - packages/shared",
+      "detail": "tsc"
+    },
+    {
+      "type": "npm",
+      "script": "theme",
+      "problemMatcher": [],
+      "label": "theme",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false,
+        "group": "serve"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "type": "npm",
+      "script": "styled",
+      "problemMatcher": [],
+      "label": "styled",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false,
+        "group": "serve"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "type": "npm",
+      "script": "shared",
+      "problemMatcher": [],
+      "label": "shared",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false,
+        "group": "serve"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "type": "shell",
+      "dependsOn": ["theme", "shared", "styled"],
+      "label": "dev:theme"
+    }
+  ]
+}

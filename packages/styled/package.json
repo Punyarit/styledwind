@@ -18,6 +18,7 @@
     "dist/*.d.js"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc -w"
   }
 }
