@@ -1,14 +1,16 @@
-import { directives } from './helper/directives';
+import { directives } from './directives/directives';
 import { appendStyle } from '@styledwind/shared/dist/appendStyle';
+import { ClientApplied } from './helper/ClientApplied';
+
+type StyledType<T extends string> = Record<T, any> & { var: Function };
 
 export const styled = <T extends string>(
   cssTemplateString: TemplateStringsArray
-): Record<T, string> => {
-  const styledResult = {} as any;
+): StyledType<T> => {
   const cssTemplates = getTemplateRules(cssTemplateString[0]);
-  const result = getCssRulesByDirective(cssTemplates, styledResult);
-  appendStyle(result.class.cssRules.join(''));
-  return { ...result.class.classDisplay } as Record<T, string>;
+  const styledRules = getStyledRules(cssTemplates);
+  appendStyle(styledRules.cssRules.join(''));
+  return styledRules.client as StyledType<T>;
 };
 
 const getTemplateRules = (cssTemplateString: string) => {
@@ -17,12 +19,16 @@ const getTemplateRules = (cssTemplateString: string) => {
   return cssTemplates;
 };
 
-const getCssRulesByDirective = (cssTemplates: string[], styledResult: any) => {
-  const cssRules: Record<string, any> = {};
+const getStyledRules = (cssTemplates: string[]) => {
+  // mutable obj
+  const styledRules: Record<string, any> = {
+    client: new ClientApplied(),
+    cssRules: [],
+  };
   for (let index = 0; index < cssTemplates.length; ++index) {
     const cssTemplate = cssTemplates[index];
     const [directiveName] = cssTemplate.split(':');
-    cssRules[directiveName] = directives[directiveName](cssTemplate, styledResult);
+    directives[directiveName](cssTemplate, styledRules);
   }
-  return cssRules;
+  return styledRules;
 };
