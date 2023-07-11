@@ -3,10 +3,6 @@ import { DynamicVariableStore } from './DynamicVariableStore';
 import { toCamelCase } from './toCamelCase';
 
 export class ClientApplied {
-  var(color: string): string {
-    return `var(--${color})`;
-  }
-
   defineDynamicVariable(varName: string, appliedVarRule: string, propertyAttr: string): void {
     Object.defineProperty(this, `$${toCamelCase(varName)}`, {
       set: (styleValue: any) => {
