@@ -5,14 +5,13 @@ import { mergeFn } from './mergeFn';
 import { keyframeFn } from './keyframeFn';
 import { templateFn } from './templateFn';
 import { variableFn } from './variableFn';
-
-const preset = (cssTemplate: string) => {};
+import { presetFn } from './presetFn';
 
 export const directives: Record<string, Function> = {
   scope: scopeFn,
   merge: mergeFn,
   variable: variableFn,
-  preset,
+  preset: presetFn,
   template: templateFn,
   keyframe: keyframeFn,
   class: classFn,
