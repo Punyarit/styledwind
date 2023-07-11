@@ -3,7 +3,9 @@ import { styleAbbrMapped } from '../constant/styleAbbrMapped';
 import { Theme, dynamicStyle } from '@styledwind/theme';
 import { DynamicVariableStore } from '../helper/DynamicVariableStore';
 
-const startStyle = document.createTextNode(`${Theme.tag.prefix}{`);
+const startStyle = document.createTextNode(
+  `${Theme.tag.prefix}{\n--auto:auto;\n--inherit:inherit;\n--initial:initial;\n--none:none;\n--revert:revert;\n--unset:unset; `
+);
 const endStyle = document.createTextNode(`}`);
 dynamicStyle.appendChild(startStyle);
 dynamicStyle.appendChild(endStyle);
@@ -17,19 +19,22 @@ export const variableFn = (varStr: string, styledRules: Record<string, any>) => 
 
     const [propertyAttr, value] = styleAbbrText.split('[');
     const styleValue = value.slice(0, -1);
+    const [styleMapped, styleValMapped] = getStyleMappedAndSetCurrentStyle(
+      propertyAttr,
+      varName,
+      styleValue
+    ).split(':');
 
     // create css properties variable for apply to style tag
     const appliedVarRule = `${styledRules.scope}-${varName}`;
     // append dynamic style
-    const dynamicVar = document.createTextNode(`--${appliedVarRule}:${styleValue};`);
+    const dynamicVar = document.createTextNode(`--${appliedVarRule}:${styleValMapped}`);
     DynamicVariableStore.store[appliedVarRule] = dynamicVar;
     dynamicStyle.insertBefore(dynamicVar, endStyle);
 
-    const [styleMapped] = getStyleMappedAndSetCurrentStyle(propertyAttr, varName).split(':');
     styledRules['variable'][varName] = `${styleMapped}:var(--${appliedVarRule});`;
-    styledRules['client'].defineDynamicVariable(varName, appliedVarRule);
+    styledRules['client'].defineDynamicVariable(varName, appliedVarRule, propertyAttr);
   }
-  // styledRules['cssRules'].push(`${Theme.tag.prefix}{${cssRules.join('')}}`);
 };
 
 function getVariableSplitted(varStr: string) {
@@ -38,9 +43,13 @@ function getVariableSplitted(varStr: string) {
   return variableSplitted;
 }
 
-function getStyleMappedAndSetCurrentStyle(propertyAttr: string, variable: string): string {
+function getStyleMappedAndSetCurrentStyle(
+  propertyAttr: string,
+  variable: string,
+  styleValue: string
+): string {
   // set CurrentStyleAbbr for handle error when style abbr does not match.
   CurrentStyleAbbr.abbr = propertyAttr;
   CurrentStyleAbbr.variable = variable;
-  return styleAbbrMapped[propertyAttr]('');
+  return styleAbbrMapped[propertyAttr](styleValue);
 }

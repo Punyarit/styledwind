@@ -20,7 +20,7 @@ const setLastValueToVariablePair = (prop1: string, prop2: string) => (v: string)
 const styleFuncWithValuePair = (prop1: string, prop2: string) => (v: string) =>
   `${styleFuncWithValue(prop1)(v)} ${styleFuncWithValue(prop2)(v)}`;
 
-export const styleAbbrMapped: Record<string, Function> = {
+export const styleAbbrMapped: Record<string, (attr: string) => string> = {
   'al-c': styleFunc('align-content'),
   'al-i': styleFunc('align-items'),
   'al-s': styleFunc('align-self'),
