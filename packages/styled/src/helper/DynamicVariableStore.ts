@@ -1,4 +1,1 @@
-
-export class DynamicVariableStore {
-  static store: Record<string, Text> = {};
-}
+export const dynamicVariableStore: Record<string, Text> = {};
