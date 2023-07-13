@@ -9,6 +9,7 @@ export const styled = <T extends string>(
 ): StyledType<T> => {
   const cssTemplates = getTemplateRules(cssTemplateString[0]);
   const styledRules = getStyledRules(cssTemplates);
+  console.log('styled.js |styledRules| = ', styledRules);
   appendStyle(styledRules.cssRules.join(''));
   return styledRules.client as StyledType<T>;
 };

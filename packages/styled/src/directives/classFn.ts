@@ -16,7 +16,9 @@ const getSeparateClass = (cssTemplate: string) => {
 const getCssRules = (separateClass: string[], styledRules: Record<string, any>) => {
   for (let index = 0; index < separateClass.length; ++index) {
     const [className, styleAbbr] = separateClass[index].split(': ');
-    const styleTextResult = getStyleResult(styleAbbr, className, styledRules).join('');
+
+    CurrentStyleAbbr.className = className;
+    const styleTextResult = getStyleResult(styleAbbr, styledRules).join('');
     const appliedClassName = `${styledRules.scope} ${className}`;
     const camelCaseClass = toCamelCase(className);
     styledRules['client'][camelCaseClass] = appliedClassName;
@@ -24,11 +26,7 @@ const getCssRules = (separateClass: string[], styledRules: Record<string, any>) 
   }
 };
 
-const getStyleResult = (
-  styleAbbrText: string,
-  className: string,
-  styledRules: Record<string, any>
-) => {
+export const getStyleResult = (styleAbbrText: string, styledRules: Record<string, any>) => {
   const cssResult: any[] = [];
   const styleAbbrSplitted = styleAbbrText.match(/[\w-$]+(\[[^\]]+\])?/g)!;
   for (let index = 0; index < styleAbbrSplitted.length; ++index) {
@@ -40,7 +38,7 @@ const getStyleResult = (
     } else {
       // class
       const [propertyAttr, value] = styleAbbr.split('[');
-      const propertyMapped = getStyleMappedAndSetCurrentStyle(propertyAttr, className, value);
+      const propertyMapped = getStyleMappedAndSetCurrentStyle(propertyAttr, value, styledRules);
       cssResult[index] = propertyMapped;
     }
   }
@@ -50,11 +48,10 @@ const getStyleResult = (
 
 const getStyleMappedAndSetCurrentStyle = (
   propertyAttr: string,
-  className: string,
-  value: string
+  value: string,
+  styledRules: Record<string, any>
 ) => {
   // set CurrentStyleAbbr for handle error when style abbr does not match.
   CurrentStyleAbbr.abbr = propertyAttr;
-  CurrentStyleAbbr.className = className;
-  return styleAbbrMapped[propertyAttr](value.slice(0, -1));
+  return styleAbbrMapped[propertyAttr](value.slice(0, -1), styledRules);
 };

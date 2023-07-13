@@ -28,11 +28,6 @@ export const elementName = `theme`;
 
 export class Theme extends HTMLElement {
   static color = new ThemeColor();
-  static preset: Record<'class' | 'keyframe' | 'template', Record<string, string>> = {
-    class: {},
-    keyframe: {},
-    template: {},
-  }; // waiting for dev
   static font = new ThemeFont();
   static media = new ThemeMedia();
   static tag = new ElementTag(Theme, elementName);

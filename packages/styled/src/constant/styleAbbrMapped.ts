@@ -20,12 +20,16 @@ const setLastValueToVariablePair = (prop1: string, prop2: string) => (v: string)
 const styleFuncWithValuePair = (prop1: string, prop2: string) => (v: string) =>
   `${styleFuncWithValue(prop1)(v)} ${styleFuncWithValue(prop2)(v)}`;
 
-export const styleAbbrMapped: Record<string, (attr: string) => string> = {
+export const styleAbbrMapped: Record<
+  string,
+  (attr: string, styledRules?: Record<string, any>) => string
+> = {
   'al-c': styleFunc('align-content'),
   'al-i': styleFunc('align-items'),
   'al-s': styleFunc('align-self'),
   all: styleFunc('all'),
-  animate: (v: string) => `animation:${v.slice(1)};`,
+  animate: (v: string, styledRules?: Record<string, any>) =>
+    `animation:${styledRules!.scope}-${v.slice(1)};`,
   'animate-delay': styleFunc('animation-delay'),
   'animate-direction': styleFunc('animation-direction'),
   'animate-duration': styleFunc('animation-duration'),
