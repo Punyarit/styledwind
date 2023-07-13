@@ -6,6 +6,7 @@ import { keyframeFn } from './keyframeFn';
 import { templateFn } from './templateFn';
 import { variableFn } from './variableFn';
 import { presetFn } from './presetFn';
+import { screenFn } from './screenFn';
 
 export const directives: Record<string, Function> = {
   scope: scopeFn,
@@ -15,5 +16,5 @@ export const directives: Record<string, Function> = {
   template: templateFn,
   keyframe: keyframeFn,
   class: classFn,
-  ...ThemeMedia.screenFn,
+  ...screenFn(),
 };

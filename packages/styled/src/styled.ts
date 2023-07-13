@@ -7,17 +7,10 @@ type StyledType<T extends string> = Record<T, any> & { var: Function };
 export const styled = <T extends string>(
   cssTemplateString: TemplateStringsArray
 ): StyledType<T> => {
-  const cssTemplates = getTemplateRules(cssTemplateString[0]);
+  const cssTemplates = cssTemplateString[0].trim().slice(1).split('@');
   const styledRules = getStyledRules(cssTemplates);
-  console.log('styled.js |styledRules| = ', styledRules);
   appendStyle(styledRules.cssRules.join(''));
   return styledRules.client as StyledType<T>;
-};
-
-const getTemplateRules = (cssTemplateString: string) => {
-  const cssTemplates = cssTemplateString.split('@');
-  cssTemplates.shift();
-  return cssTemplates;
 };
 
 const getStyledRules = (cssTemplates: string[]) => {

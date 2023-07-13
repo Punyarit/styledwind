@@ -2,9 +2,9 @@ import { CurrentStyleAbbr } from '@stylewind/shared/dist/currentStyleAbbr';
 import { styleAbbrMapped } from '../constant/styleAbbrMapped';
 import { toCamelCase } from '../helper/toCamelCase';
 
-export const classFn = (cssTemplate: string, styledRules: Record<string, any>) => {
+export const classFn = (cssTemplate: string, styledRules: Record<string, any>, screen?: string) => {
   const separateClass = getSeparateClass(cssTemplate);
-  getCssRules(separateClass, styledRules);
+  setCssRules(separateClass, styledRules, screen);
 };
 
 const getSeparateClass = (cssTemplate: string) => {
@@ -13,16 +13,24 @@ const getSeparateClass = (cssTemplate: string) => {
   return separateClass;
 };
 
-const getCssRules = (separateClass: string[], styledRules: Record<string, any>) => {
+const setCssRules = (
+  separateClass: string[],
+  styledRules: Record<string, any>,
+  screen?: string
+) => {
   for (let index = 0; index < separateClass.length; ++index) {
     const [className, styleAbbr] = separateClass[index].split(': ');
-
-    CurrentStyleAbbr.className = className;
+    const [classNameVal] = className.match(/([\w-]+)(?=[\s::.#>,]|$)/g)!;
+    CurrentStyleAbbr.className = classNameVal;
     const styleTextResult = getStyleResult(styleAbbr, styledRules).join('');
-    const appliedClassName = `${styledRules.scope} ${className}`;
-    const camelCaseClass = toCamelCase(className);
+    const appliedClassName = `${styledRules.scope} ${classNameVal}`;
+    const camelCaseClass = toCamelCase(classNameVal);
+    const compliedStyle = `.${styledRules.scope}.${className}{${styleTextResult}}`;
+    const finalStyle = screen ? `${screen}{${compliedStyle}}` : compliedStyle;
+
+    // set to styledRules
     styledRules['client'][camelCaseClass] = appliedClassName;
-    styledRules['cssRules'].push(`.${styledRules.scope}.${className}{${styleTextResult}}`);
+    styledRules['cssRules'].push(finalStyle);
   }
 };
 
