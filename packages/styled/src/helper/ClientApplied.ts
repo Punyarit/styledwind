@@ -15,9 +15,6 @@ export class ClientApplied {
           resolve(element);
         } else if (shouldEndTime <= Date.now()) {
           clearInterval(intervalTimer);
-          console.warn(
-            `Styledwind Error: element id "${dynamicId}" not displayed in the DOM within 2 seconds.`
-          );
           resolve(null);
         }
       }, 0);
@@ -30,7 +27,8 @@ export class ClientApplied {
 
         const className = styledRules.dynamic[dynamicKey][val];
         if (!element) {
-          throw Error(`Styledwind Error: Can not set "${val}" to element id "${dynamicId}".`);
+          console.warn(`Styledwind Warning: Can not set "${val}" to the element id "${dynamicId}". Because the element id "${dynamicId}" not displayed in the DOM within 2 seconds.`);
+          return;
         }
         if (!className) {
           throw Error(`Styledwind Error: dynamic value "${val}" is not unable.`);
@@ -53,6 +51,8 @@ export class ClientApplied {
 
         this.#dynamicCached = classes;
       },
+
+      get: () => dynamicId,
     });
   }
 

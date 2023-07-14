@@ -25,6 +25,5 @@ export const dynamicFn = (cssTemplate: string, styledRules: Record<string, any>)
 
     // set up
     styledRules['client'].defineDynamic(dynamicKey, dynamicId, styledRules);
-    styledRules['client'][dynamicKey] = dynamicId;
   }
 };
