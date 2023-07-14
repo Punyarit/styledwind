@@ -8,15 +8,6 @@ export class ThemeMedia {
   }
 
   set screen(screenObj: Record<string, string>) {
-    // this.createScreenFn(screenObj);
     this.#screen = screenObj;
   }
-
-  // private createScreenFn(screenObj: Record<string, string>) {
-  //   for (const screenKey in screenObj) {
-  //     ThemeMedia.screenFn[screenKey] = (cssTemplate: string) => {
-  //       console.log('themeMedia.js |cssTemplate| = ', cssTemplate);
-  //     };
-  //   }
-  // }
 }

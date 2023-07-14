@@ -5,7 +5,6 @@ export const keyframeFn = (keyframeStr: string, styledRules: Record<string, any>
     .slice(9)
     .trim()
     .split(/\n\s*\n/);
-
   for (let KeyframesIndex = 0; KeyframesIndex < keyframes.length; ++KeyframesIndex) {
     const keyframe = keyframes[KeyframesIndex].trim();
 

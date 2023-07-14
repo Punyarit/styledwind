@@ -33,7 +33,7 @@ export const variableFn = (varStr: string, styledRules: Record<string, any>) => 
     dynamicStyle.insertBefore(dynamicVar, endStyle);
 
     styledRules['variable'][varName] = `${styleMapped}:var(--${appliedVarRule});`;
-    styledRules['client'].defineDynamicVariable(varName, appliedVarRule, propertyAttr);
+    styledRules['client'].defineVariable(varName, appliedVarRule, propertyAttr);
   }
 };
 
